@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchphotos, fetchgifs, fetchvideos } from "../api/mediaApi";
 import Resultcard from "./resultcard";
 import {
-  setActiveTab,
-  setQuery,
   setLoading,
   setError,
   setResults
@@ -50,7 +48,7 @@ const resultgrid = () => {
         }));
     } else if (activeTab === "Gifs") {
         let res = await fetchgifs(query);
-       data = res.map((item, index) => ({
+       data = res.map((item) => ({
           id: item.id,
           type: "gif",
           thumbnail: item.media_formats.gif.url,

@@ -2,8 +2,6 @@ import "../index.css";
 import { useDispatch } from "react-redux";
 import {
   addCollection,
-  removeCollection,
-  clearCollection,
 } from "../redux/feature/collectionslice";
 import { addedToast } from "../redux/feature/collectionslice";
 
@@ -27,66 +25,81 @@ const ResultCard = (props) => {
   };
 
   return (
-    <div
-      className="m-1 p-1 rounded-lg hover:scale-105 cursor-pointer 
-                    h-70 w-75 transition-all duration-300 relative"
+   <div
+  className="
+    group relative 
+    w-60   /* medium width */
+    h-72   /* medium height */
+    m-2 p-2 
+    rounded-xl 
+    bg-white/5 
+    shadow-md 
+    hover:shadow-xl hover:scale-[1.02]
+    transition-all duration-300
+  "
+>
+  <div className="h-44 w-full overflow-hidden rounded-lg">
+    {props.type === "photo" && (
+      <img
+        src={props.src}
+        alt={props.title}
+        className="
+          w-full h-full object-cover 
+          transition duration-300 
+          group-hover:scale-105
+        "
+      />
+    )}
+
+    {props.type === "video" && (
+      <video
+        src={props.src}
+        autoPlay
+        loop
+        muted
+        className="w-full h-full object-cover"
+      />
+    )}
+  </div>
+
+  {/* Buttons */}
+  <div
+    className="
+      absolute bottom-3 right-3
+      flex gap-2
+    "
+  >
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        collection(props);
+      }}
+      className="
+        px-3 py-1.5 text-sm
+        rounded-xl 
+        bg-gradient-to-r from-indigo-500 to-purple-500
+        text-white shadow 
+        hover:scale-105
+      "
     >
-      <a className="h-[60%] block overflow-hidden rounded-lg">
-        {props.type === "photo" && (
-          <img
-            className="h-full w-full object-cover hover:scale-95 transition-all duration-200"
-            src={props.src}
-            alt={props.title}
-          />
-        )}
+      Save
+    </button>
 
-        {props.type === "video" && (
-          <video
-            className="h-full w-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            src={props.src}
-          />
-        )}
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        share(props);
+      }}
+      className="
+        px-3 py-1.5 text-sm
+        rounded-xl bg-white/80 border
+      "
+    >
+      Share
+    </button>
+  </div>
+</div>
 
-        {props.type === "gif" && (
-          <img
-            className="h-full w-full object-cover hover:scale-95 transition-all duration-200"
-            src={props.src}
-            alt={props.title}
-          />
-        )}
-      </a>
-
-      {/* Buttons aligned to flex-end bottom-right */}
-      <div className="absolute bottom-4 right-4 flex gap-4 justify-end items-end">
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            collection(props);
-          }}
-          className="px-4 py-2 rounded-2xl 
-                     bg-gradient-to-r from-indigo-500 to-purple-500 
-                     text-white font-medium shadow-md 
-                     hover:shadow-lg hover:scale-105 
-                     transition-all duration-300"
-        >
-          Save
-        </button>
-
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            share(props);
-          }}
-          className="px-4 py-2 rounded-2xl bg-white/80 border"
-        >
-          Share
-        </button>
-      </div>
-    </div>
   );
 };
 
