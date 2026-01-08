@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
-    <div className=' w-full h-screen bg-gray-950 text-white'>
+    <div className=' w-full h-screen bg-gray-900 text-white'>
        <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/collection' element={<Collectionpage />} />

@@ -56,8 +56,9 @@ const resultgrid = () => {
           src: item.media_formats.gif.url,
           alt: item.title,
           url: item.url 
-
+            
         }));
+      
     }
    dispatch(setResults(data));
    console.log("fetched data:", data);
